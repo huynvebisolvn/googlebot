@@ -58,22 +58,7 @@ const path = require('path');
     const page = await browser.newPage();
 
     // Storage for results
-    let finalUrl = '';
     let jsErrors = [];
-    
-    // Monitor all HTTP responses
-    page.on('response', response => {
-      const url = response.url();
-      const status = response.status();
-      // Track any redirects
-      if (status >= 300 && status < 400) {
-        const location = response.headers()['location'];
-        if (location) {
-          console.log(`🔄 Redirect detected: ${url} (${status}) → ${location}`);
-        }
-      }
-    });
-    
     // Monitor JavaScript errors
     page.on('pageerror', error => {
       jsErrors.push({
@@ -91,7 +76,7 @@ const path = require('path');
     });
     
     try {
-      console.log(`\n📱 ${scenario.name}: ${scenario.description}`);
+      console.log(`\n${scenario.name}: ${scenario.description}`);
       
       // Set Googlebot user agent
       await page.setUserAgent('Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)');
@@ -110,16 +95,6 @@ const path = require('path');
         waitUntil: 'networkidle2',
         timeout: 30000
       });
-      
-      finalUrl = page.url();
-      // Check for redirect
-      if (finalUrl !== site.url) {
-        console.log(`PAGE REDIRECT DETECTED: ${site.url} -> ${finalUrl}`);
-        // Check if redirected to sorry page
-        if (finalUrl.includes('/sorry')) {
-          console.log(`PAGE REDIRECT DETECTED: ${site.url} -> /sorry`);
-        }
-      }
 
       // Report JavaScript errors
       if (jsErrors.length > 0) {
@@ -137,7 +112,7 @@ const path = require('path');
           path: screenshotPath, 
           fullPage: true 
         });
-        console.log(`📸 Screenshot saved: ${screenshotPath}`);
+        console.log(`Screenshot saved: ${screenshotPath}`);
       } catch (screenshotError) {}
     } catch (err) {}
 
@@ -145,8 +120,5 @@ const path = require('path');
     console.log(''); // Empty line
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  
-  console.log(`\n✅ Completed testing ${site.name}`);
-  console.log('='.repeat(50));
   }
 })();
