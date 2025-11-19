@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-// rm -rf screenshots && node test.js
+// rm -rf screenshots-* && node crawl.js
 
 (async () => {
   const testSites = [

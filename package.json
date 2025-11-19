@@ -5,8 +5,10 @@
   "main": "crawl.js",
   "scripts": {
     "start": "node crawl.js",
-    "clean": "rm -rf screenshots",
-    "test": "rm -rf screenshots && node crawl.js"
+    "clean": "rm -rf screenshots-*",
+    "clean:tabelog": "rm -rf screenshots-tabelog",
+    "clean:booking": "rm -rf screenshots-booking",
+    "test": "rm -rf screenshots-* && node crawl.js"
   },
   "keywords": [
     "googlebot",
