@@ -1,0 +1,23 @@
+{
+  "name": "googlebot-crawler",
+  "version": "1.0.0",
+  "description": "Tool mô phỏng hành vi của Googlebot để test website",
+  "main": "crawl.js",
+  "scripts": {
+    "start": "node crawl.js",
+    "clean": "rm -rf screenshots",
+    "test": "rm -rf screenshots && node crawl.js"
+  },
+  "keywords": [
+    "googlebot",
+    "crawler",
+    "puppeteer",
+    "seo",
+    "testing"
+  ],
+  "author": "huynvebisolvn",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
