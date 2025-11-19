@@ -31,28 +31,24 @@ const path = require('path');
       name: 'Screen Normal IP',
       description: 'Complete browser simulation with normal IP',
       useGoogleIP: false,
-      monitorAPI: true
     },
     {
       name: 'Primary Googlebot',
       description: 'Primary Googlebot IP (66.249.79.142)',
       useGoogleIP: true,
       googleIP: '66.249.79.142',
-      monitorAPI: true
     },
     {
       name: 'Googlebot crawler',
       description: 'Google crawler IP range 66.249.64.0/19 (66.249.65.100)',
       useGoogleIP: true,
       googleIP: '66.249.65.100',
-      monitorAPI: true
     },
     {
       name: 'Google Mobile crawler',
       description: 'Google Mobile crawler IP (216.58.197.46)',
       useGoogleIP: true,
       googleIP: '216.58.197.46',
-      monitorAPI: true
     },
   ];
 
@@ -63,7 +59,6 @@ const path = require('path');
 
     // Storage for results
     let finalUrl = '';
-    let errorMessages = [];
     let jsErrors = [];
     
     // Monitor all HTTP responses
@@ -91,10 +86,6 @@ const path = require('path');
     // Monitor console errors
     page.on('console', msg => {
       if (msg.type() === 'error') {
-        errorMessages.push({
-          text: msg.text(),
-          timestamp: new Date().toISOString()
-        });
         console.log(`🚨 Console Error: ${msg.text()}`);
       }
     });
